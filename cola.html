@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cola de Véspera</title>
+<meta name="description" content="Resumo de uma página por matéria para imprimir: Modelagem, SQL, Sistemas Operacionais e Segurança.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="cola.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+<header class="cabecalho">
+  <div>
+    <h1>Cola de Véspera</h1>
+    <p>Modelagem · SQL · Sistemas Operacionais · Segurança da Informação</p>
+  </div>
+  <div class="barra-cola">
+    <span class="aviso-tela">Ctrl+P para imprimir · <a href="index.html">voltar ao guia</a></span>
+    <button class="troca-tema" type="button"></button>
+  </div>
+</header>
+
+<!-- ================= MODELAGEM ================= -->
+<section class="materia">
+  <h2>Modelagem de Dados</h2>
+  <div class="colunas">
+
+    <div class="caixa chave">
+      <h3>Os três níveis</h3>
+      <p><b>Conceitual</b> → DER, entidades, sem tecnologia<br>
+      <b>Lógico</b> → tabelas e chaves, sem SGBD<br>
+      <b>Físico</b> → tipos e índices, já no SGBD</p>
+      <p>Só o <b>físico</b> depende do SGBD. Tabela aparece no <b>lógico</b>.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>DER: os símbolos</h3>
+      <p>Retângulo = <b>entidade</b> · Elipse = <b>atributo</b> · Losango = <b>relacionamento</b> · Retângulo duplo = <b>entidade fraca</b></p>
+      <p>Leia a frase: substantivo = entidade, característica = atributo, verbo = relacionamento.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Tipos de atributo</h3>
+      <ul>
+        <li><b>Simples</b> — indivisível (CPF)</li>
+        <li><b>Composto</b> — endereço → rua, nº, CEP</li>
+        <li><b>Multivalorado</b> — vários telefones (<b>proibido</b> no relacional: vira tabela)</li>
+        <li><b>Derivado</b> — idade (não se armazena)</li>
+      </ul>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Chaves</h3>
+      <p><b>PK</b> — única, <b>nunca NULL</b><br>
+      <b>FK</b> — aponta para PK de outra tabela, <b>aceita NULL</b><br>
+      <b>Candidata</b> — poderia ser PK · <b>Alternativa</b> — candidata não escolhida</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Cardinalidade → tabela</h3>
+      <table>
+        <tr><th>Tipo</th><th>Implementação</th></tr>
+        <tr><td>1:1</td><td>FK com UNIQUE em um dos lados</td></tr>
+        <tr><td>1:N</td><td><b>FK no lado N</b></td></tr>
+        <tr><td>N:N</td><td><b>Tabela associativa</b> com as 2 FKs</td></tr>
+      </table>
+      <p>Leia sempre <b>nos dois sentidos</b> antes de decidir.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Normalização — o mantra</h3>
+      <p>Cada campo depende <b>da chave</b> (1FN), <b>da chave inteira</b> (2FN) e <b>de nada além da chave</b> (3FN).</p>
+      <ul>
+        <li><b>1FN</b> — valor atômico, sem grupo repetido</li>
+        <li><b>2FN</b> — sem dependência <b>parcial</b></li>
+        <li><b>3FN</b> — sem dependência <b>transitiva</b></li>
+      </ul>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Pegadinhas</h3>
+      <ul>
+        <li><b>2FN só é violada com chave composta.</b> PK de uma coluna + 1FN = já está em 2FN</li>
+        <li>PK não aceita NULL; <b>FK aceita</b></li>
+        <li>Tabela associativa costuma ter <b>atributos próprios</b> (nota, quantidade) — são do relacionamento</li>
+        <li>Anomalias: <b>inserção, atualização, exclusão</b></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SQL ================= -->
+<section class="materia">
+  <h2>Banco de Dados SQL</h2>
+  <div class="colunas">
+
+    <div class="caixa chave">
+      <h3>As cinco famílias</h3>
+      <table>
+        <tr><th>Sigla</th><th>Comandos</th></tr>
+        <tr><td><b>DDL</b></td><td>CREATE, ALTER, DROP, <b>TRUNCATE</b></td></tr>
+        <tr><td><b>DML</b></td><td>INSERT, UPDATE, <b>DELETE</b></td></tr>
+        <tr><td><b>DQL</b></td><td>SELECT</td></tr>
+        <tr><td><b>DCL</b></td><td>GRANT, REVOKE</td></tr>
+        <tr><td><b>TCL</b></td><td>COMMIT, ROLLBACK, SAVEPOINT</td></tr>
+      </table>
+    </div>
+
+    <div class="caixa pega">
+      <h3>DELETE × TRUNCATE × DROP</h3>
+      <ul>
+        <li><b>DELETE</b> — DML, linha a linha, aceita WHERE, dá ROLLBACK</li>
+        <li><b>TRUNCATE</b> — <b>DDL</b>, esvazia tudo, <b>sem WHERE</b>, sem volta</li>
+        <li><b>DROP</b> — apaga a tabela <b>e a estrutura</b></li>
+      </ul>
+    </div>
+
+    <div class="caixa">
+      <h3>Restrições e tipos</h3>
+      <p><b>UNIQUE aceita 1 NULL; PRIMARY KEY não aceita nenhum.</b></p>
+      <p><code>CHAR</code> = fixo · <code>VARCHAR</code> = variável<br>
+      Dinheiro → <b>DECIMAL</b> (exato). Nunca FLOAT.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>WHERE: operadores</h3>
+      <p><code>BETWEEN 7 AND 9</code> <b>inclui as pontas</b><br>
+      <code>IN ('Recife','Olinda')</code> · <code>LIKE 'A%'</code></p>
+      <p><b>%</b> = vários caracteres · <b>_</b> = exatamente um</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>NULL</h3>
+      <p><code>WHERE col = NULL</code> <b>nunca funciona</b> e não dá erro — simplesmente não retorna nada.</p>
+      <p>Certo: <code>IS NULL</code> / <code>IS NOT NULL</code></p>
+      <p><code>COUNT(*)</code> conta tudo · <code>COUNT(col)</code> <b>ignora NULL</b></p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>WHERE × HAVING</h3>
+      <p><b>WHERE filtra LINHAS, antes de agrupar.</b><br>
+      <b>HAVING filtra GRUPOS, depois de agrupar.</b></p>
+      <p>Agregação (AVG, COUNT…) <b>só no HAVING</b>, nunca no WHERE.</p>
+      <p>Coluna do SELECT fora de agregação <b>precisa estar no GROUP BY</b>.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>JOIN</h3>
+      <p><b>INNER</b> — só quem tem par nos dois lados<br>
+      <b>LEFT</b> — <b>todos da esquerda</b>, com par ou não<br>
+      <b>CROSS</b> — todas as combinações (JOIN sem ON)</p>
+      <p>Pergunta com <b>"inclusive os que não têm"</b> → <b>LEFT JOIN</b>.</p>
+      <p>Quem <b>não</b> tem par: <code>LEFT JOIN … WHERE b.id IS NULL</code></p>
+      <p>Atravessar N:N = <b>2 JOINs</b>.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Ordem lógica de execução</h3>
+      <div class="formula">FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT</div>
+      <p>Por isso apelido do SELECT <b>não vale no WHERE</b>, mas vale no ORDER BY.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Sintaxe que a prova inverte</h3>
+      <p><code>UPDATE tabela SET col = valor WHERE cond</code> — SET <b>sempre antes</b> do WHERE.</p>
+      <p>Sem WHERE, UPDATE e DELETE valem para <b>todas as linhas</b>.</p>
+      <p>Subconsulta com vários valores → <b>IN</b>, não <code>=</code>.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SISTEMAS OPERACIONAIS ================= -->
+<section class="materia">
+  <h2>Sistemas Operacionais</h2>
+  <div class="colunas">
+
+    <div class="caixa chave">
+      <h3>Processo × Thread</h3>
+      <p><b>Processo</b> = memória própria e isolada.<br>
+      <b>Thread</b> = compartilha a memória do processo.</p>
+      <p>Thread tem <b>só dela</b>: pilha, registradores e contador de programa.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Estados do processo</h3>
+      <p>Novo → Pronto → Executando → Bloqueado → Terminado</p>
+      <p><b>Bloqueado → Executando NÃO EXISTE.</b> Quando a E/S termina, volta para <b>Pronto</b>.</p>
+      <p>Executando → Pronto = <b>preempção</b>.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Tipos de thread</h3>
+      <ul>
+        <li><b>Usuário</b> — rápida; se uma bloqueia, <b>todas bloqueiam</b></li>
+        <li><b>Kernel</b> — paralelismo real, porém mais lenta (chamada de sistema)</li>
+        <li><b>Híbrida</b> — combina as duas</li>
+      </ul>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Scheduler × Dispatcher</h3>
+      <p><b>Scheduler escolhe</b> quem executa.<br>
+      <b>Dispatcher faz a troca de contexto</b> e entrega a CPU.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Fórmulas do escalonamento</h3>
+      <div class="formula">Turnaround = conclusão − chegada</div>
+      <div class="formula">Espera = turnaround − execução</div>
+      <p>Resposta = 1ª execução − chegada. A prova quase sempre pede a <b>média</b>.</p>
+      <p>Passo a passo: <b>desenhe o Gantt</b> → anote conclusões → turnaround → espera → média.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Algoritmos</h3>
+      <table>
+        <tr><th>Alg.</th><th>Preempt.</th><th>Problema</th></tr>
+        <tr><td>FCFS</td><td>Não</td><td><b>Efeito comboio</b></td></tr>
+        <tr><td>SJF</td><td>Não</td><td>Starvation</td></tr>
+        <tr><td>SRTF</td><td>Sim</td><td>Starvation</td></tr>
+        <tr><td>RR</td><td>Sim</td><td>Quantum mal escolhido</td></tr>
+        <tr><td>Prioridade</td><td>Os dois</td><td>Starvation → <b>aging</b></td></tr>
+      </table>
+      <p><b>SJF = menor tempo médio de espera</b> (ótimo). Quantum grande demais → RR vira <b>FCFS</b>.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Deadlock — Coffman</h3>
+      <p>Precisam das <b>4 ao mesmo tempo</b>:</p>
+      <p>1. Exclusão mútua · 2. Posse e espera · 3. Não preempção · 4. <b>Espera circular</b></p>
+      <p>Estratégias: <b>prevenção</b> (impede uma condição) · <b>evitação</b> = algoritmo do <b>banqueiro</b> · detecção · ignorar = <b>avestruz</b></p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Deadlock × Starvation</h3>
+      <p><b>Deadlock</b>: ninguém do grupo anda, nunca.<br>
+      <b>Starvation</b>: o sistema anda, só <i>aquele</i> processo nunca é escolhido.</p>
+      <p>Banqueiro é <b>evitação</b>, não prevenção.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Mutex × Semáforo</h3>
+      <p><b>Mutex</b> — binário, <b>tem dono</b> (só quem travou destrava), lock/unlock</p>
+      <p><b>Semáforo</b> — contador, sem dono, deixa passar N, <b>wait (P) / signal (V)</b></p>
+      <p>Semáforo iniciado em 1 = semáforo binário ≈ mutex.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Memória</h3>
+      <p><b>Paginação</b> = tamanho fixo → fragmentação <b>interna</b><br>
+      <b>Segmentação</b> = variável → fragmentação <b>externa</b></p>
+      <p><b>Thrashing</b> = mais tempo trocando página do que executando.<br>
+      Substituição: FIFO (anomalia de Belady), <b>LRU</b>, Ótimo.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Disco e E/S</h3>
+      <p><b>Pratos → trilhas → setores → cilindros.</b> Setor = menor unidade física.</p>
+      <p><b>Interrupção</b> = hardware · <b>Trap</b> = software (divisão por zero, syscall)</p>
+      <p>Polling (gasta CPU) &lt; Interrupção &lt; <b>DMA</b> (mínimo custo)</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SEGURANÇA ================= -->
+<section class="materia">
+  <h2>Segurança da Informação</h2>
+  <div class="colunas">
+
+    <div class="caixa chave">
+      <h3>Tripé CID</h3>
+      <p><b>Confidencialidade</b> — só quem pode, vê (vazamento)<br>
+      <b>Integridade</b> — não foi alterado (boleto adulterado)<br>
+      <b>Disponibilidade</b> — acessível quando preciso (DDoS, ransomware)</p>
+      <p>Extras: <b>autenticidade</b> (quem é) · <b>não repúdio</b> (não pode negar) · legalidade · privacidade</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Ameaça × Vulnerabilidade</h3>
+      <p><b>Vulnerabilidade</b> = a fraqueza interna. <b>Você conserta.</b><br>
+      <b>Ameaça</b> = o agente externo. <b>Você não controla.</b></p>
+      <div class="formula">Risco = probabilidade × impacto</div>
+      <p>Respostas ao risco: mitigar, transferir, aceitar, evitar.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Criptografia</h3>
+      <table>
+        <tr><th></th><th>Chaves</th><th>Garante</th></tr>
+        <tr><td><b>Simétrica</b></td><td>1 (AES)</td><td>Sigilo · rápida · <b>problema: distribuir a chave</b></td></tr>
+        <tr><td><b>Assimétrica</b></td><td>Par (RSA)</td><td>Sigilo + autenticidade · lenta</td></tr>
+        <tr><td><b>Hash</b></td><td>0 (SHA-256)</td><td><b>Integridade</b> · via única</td></tr>
+      </table>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Qual chave usar</h3>
+      <div class="formula">SIGILO → pública do DESTINATÁRIO</div>
+      <div class="formula">ASSINAR → privada do AUTOR</div>
+      <p>Verificar assinatura → pública do autor. Abrir o que foi cifrado para você → sua privada.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Assinatura digital</h3>
+      <p>Garante <b>autenticidade + integridade + não repúdio</b>.</p>
+      <p><b>NÃO garante confidencialidade</b> — o documento continua legível. Pegadinha nº 1.</p>
+      <p><b>Certificado digital</b> = a AC atestando de quem é a chave pública.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Autenticação e acesso</h3>
+      <p>3 fatores: o que você <b>sabe</b> · <b>tem</b> · <b>é</b>. 2FA = <b>tipos diferentes</b>.</p>
+      <p>Autenticação (quem é) <b>vem antes</b> de autorização (o que pode).</p>
+      <p><b>DAC</b> = dono decide · <b>MAC</b> = sistema por rótulos · <b>RBAC</b> = papel/cargo</p>
+      <p><b>Menor privilégio</b>: só o acesso necessário.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Vírus × Worm × Trojan</h3>
+      <p><b>Vírus precisa de hospedeiro</b> e de execução.<br>
+      <b>Worm anda sozinho</b> pela rede.<br>
+      <b>Trojan</b> se disfarça e <b>não se replica</b>.</p>
+      <p>Ransomware → ataca <b>disponibilidade</b>, defesa real = <b>backup</b>.<br>
+      Rootkit → esconde a invasão do SO.</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Tipos de vírus</h3>
+      <p>Executáveis · memória · <b>boot</b> (roda antes do SO) · driver · <b>macro</b> (Word/Excel) · código-fonte · polimórfico</p>
+    </div>
+
+    <div class="caixa">
+      <h3>Ataques</h3>
+      <p><b>Phishing</b> (isca falsa) · <b>Engenharia social</b> (manipula a pessoa) · <b>DDoS</b> (várias máquinas) · <b>MITM</b> · <b>SQL Injection</b> · <b>XSS</b> · força bruta · spoofing</p>
+      <p>SQL Injection se previne com <b>prepared statements</b>, não com antivírus.</p>
+    </div>
+
+    <div class="caixa chave">
+      <h3>Defesas</h3>
+      <p><b>IDS detecta</b> (passivo) · <b>IPS detecta e bloqueia</b> (ativo)</p>
+      <div class="formula">Backup 3-2-1: 3 cópias · 2 mídias · 1 fora do local</div>
+      <p>Incremental = desde o último backup <b>qualquer</b>. Diferencial = desde o último <b>completo</b>.</p>
+    </div>
+
+    <div class="caixa pega">
+      <h3>Hacker × Cracker e LGPD</h3>
+      <p>A palavra que separa é <b>autorização</b>. Hacker = white hat; cracker = black hat.</p>
+      <p><b>Nenhum SO é imune.</b> Alternativa com "imune" ou "sem vulnerabilidade" está errada.</p>
+      <p>LGPD — <b>dado sensível</b>: raça, religião, opinião política, saúde, biometria, vida sexual.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="rodape">
+  Revisão de Véspera · <a href="index.html">abrir o guia interativo</a>
+</div>
+
+</body>
+</html>

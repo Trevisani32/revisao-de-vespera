@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revisão de Véspera</title>
+<meta name="description" content="Guia interativo de estudo: Modelagem de Dados, SQL, Sistemas Operacionais e Segurança da Informação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="estilo.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+<div class="topo-movel">
+  <button id="botao-menu" type="button" aria-label="Abrir menu de matérias">Matérias</button>
+  <span class="marca-titulo">Revisão de Véspera</span>
+  <button class="troca-tema" type="button"></button>
+</div>
+
+<div class="app">
+
+  <aside class="lateral">
+    <div class="marca">
+      <span class="marca-titulo">Revisão de Véspera</span>
+      <span class="marca-sub">Guia interativo</span>
+    </div>
+
+    <nav id="nav-materias" aria-label="Matérias"></nav>
+
+    <div class="lateral-rodape">
+      <a class="link-lateral" href="cola.html">Cola para imprimir →</a>
+    </div>
+  </aside>
+
+  <main id="area">
+    <header class="topo">
+      <div class="topo-linha">
+        <div>
+          <h1 id="titulo-materia">Revisão de véspera</h1>
+          <p id="subtitulo-materia">Modelagem · SQL · Sistemas Operacionais · Segurança</p>
+        </div>
+        <button class="troca-tema troca-tema-topo" type="button"></button>
+      </div>
+      <div id="abas" role="tablist"></div>
+    </header>
+    <div id="conteudo"></div>
+  </main>
+
+</div>
+
+<script src="util.js"></script>
+<script src="db.js"></script>
+<script src="sqlmini.js"></script>
+<script src="conteudo.js"></script>
+<script src="pratica.js"></script>
+<script src="sim-bd.js"></script>
+<script src="sim-so-seg.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

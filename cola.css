@@ -1,0 +1,241 @@
+/* Folha da cola: pensada para o papel primeiro, a tela depois. */
+
+:root {
+  --tinta:    #12242B;
+  --suave:    #4E666F;
+  --fraco:    #7A9098;
+  --linha:    #C9D4D3;
+  --acento:   #0F7A82;
+  --sinal:    #B93052;
+  --papel:    #FFFFFF;
+  --caixa:    #F2F5F4;
+  --acento-f: #E3EFEF;
+  --sinal-f:  #FBE9ED;
+
+  --titulo: 'Familjen Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --texto:  'Source Serif 4', Georgia, serif;
+  --mono:   'JetBrains Mono', Consolas, monospace;
+
+  color-scheme: light;
+}
+
+/* Tema escuro apenas para leitura em tela. A impressão volta ao claro. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    --tinta:    #DFE9E8;
+    --suave:    #94A9AF;
+    --fraco:    #6C868E;
+    --linha:    #223F46;
+    --acento:   #46B4BD;
+    --sinal:    #F0788F;
+    --papel:    #0B1519;
+    --caixa:    #122328;
+    --acento-f: #102F35;
+    --sinal-f:  #331821;
+    color-scheme: dark;
+  }
+}
+
+:root[data-tema="escuro"] {
+  --tinta:    #DFE9E8;
+  --suave:    #94A9AF;
+  --fraco:    #6C868E;
+  --linha:    #223F46;
+  --acento:   #46B4BD;
+  --sinal:    #F0788F;
+  --papel:    #0B1519;
+  --caixa:    #122328;
+  --acento-f: #102F35;
+  --sinal-f:  #331821;
+  color-scheme: dark;
+}
+
+.barra-cola {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.troca-tema {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 10px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: var(--caixa);
+  color: var(--suave);
+  font-family: var(--titulo);
+  font-size: 12px;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.troca-tema:hover { border-color: var(--acento); color: var(--acento); }
+
+.troca-tema svg {
+  width: 15px; height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+  max-width: 1000px;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.cabecalho {
+  border-bottom: 2px solid var(--tinta);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cabecalho h1 {
+  font-family: var(--titulo);
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin: 0;
+}
+
+.cabecalho p { margin: 3px 0 0; color: var(--suave); font-size: 12.5px; }
+
+.aviso-tela {
+  font-family: var(--titulo);
+  font-size: 12px;
+  color: var(--suave);
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  padding: 7px 11px;
+}
+
+.materia { break-inside: avoid; margin-bottom: 22px; }
+
+.materia > h2 {
+  font-family: var(--titulo);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--acento);
+  border-bottom: 1px solid var(--acento);
+  padding-bottom: 4px;
+  margin: 0 0 12px;
+}
+
+.colunas { columns: 2; column-gap: 20px; }
+
+@media (max-width: 700px) { .colunas { columns: 1; } }
+
+.caixa {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  padding: 9px 12px;
+  margin: 0 0 9px;
+  background: var(--caixa);
+}
+
+.caixa h3 {
+  font-family: var(--titulo);
+  font-size: 12px;
+  font-weight: 650;
+  margin: 0 0 5px;
+  color: var(--tinta);
+}
+
+.caixa p { margin: 0 0 5px; }
+.caixa p:last-child { margin-bottom: 0; }
+
+.caixa ul { margin: 0; padding-left: 15px; }
+.caixa li { margin-bottom: 3px; }
+
+.caixa.chave { background: var(--acento-f); border-color: var(--acento); }
+.caixa.chave h3 { color: var(--acento); }
+
+.caixa.pega { background: var(--sinal-f); border-color: var(--sinal); }
+.caixa.pega h3 { color: var(--sinal); }
+.caixa.pega h3::before { content: '⚠ '; }
+
+b { font-weight: 650; }
+
+code {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: rgba(15, 122, 130, .1);
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.formula {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--papel);
+  border: 1px dashed var(--acento);
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin: 5px 0;
+  text-align: center;
+  color: var(--acento);
+}
+
+table { border-collapse: collapse; width: 100%; font-family: var(--titulo); font-size: 11.5px; margin: 4px 0; }
+th { text-align: left; font-weight: 650; border-bottom: 1px solid var(--tinta); padding: 3px 5px; }
+td { border-bottom: 1px solid var(--linha); padding: 3px 5px; vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+
+.rodape {
+  border-top: 1px solid var(--linha);
+  margin-top: 24px;
+  padding-top: 10px;
+  font-family: var(--titulo);
+  font-size: 11px;
+  color: var(--fraco);
+  text-align: center;
+}
+
+.rodape a { color: var(--acento); }
+
+@page { margin: 12mm; }
+
+@media print {
+  /* Tinta no papel é sempre escura sobre branco, mesmo se a tela estava no escuro. */
+  :root, :root[data-tema="escuro"], :root:not([data-tema="claro"]) {
+    --tinta:    #12242B;
+    --suave:    #3E555E;
+    --fraco:    #6A7F87;
+    --linha:    #B9C6C5;
+    --acento:   #0B5C63;
+    --sinal:    #9E2543;
+    --papel:    #FFFFFF;
+    --caixa:    #FFFFFF;
+    --acento-f: #F0F7F7;
+    --sinal-f:  #FDF2F5;
+    color-scheme: light;
+  }
+
+  body { padding: 0; max-width: none; font-size: 9.6pt; background: #fff; color: #12242B; }
+  .aviso-tela, .troca-tema, .rodape { display: none !important; }
+  .caixa { background: #fff !important; }
+  .caixa.chave { background: #F0F7F7 !important; }
+  .caixa.pega { background: #FDF2F5 !important; }
+  .materia { break-inside: auto; }
+}
