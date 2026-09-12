@@ -23,6 +23,7 @@ Dê duplo clique em `index.html`. Não precisa instalar nada, não precisa de se
 - **75 questões** de múltipla escolha com explicação do porquê da resposta
 - **Cola para imprimir** (`cola.html`), abra e aperte Ctrl+P
 - **Tema claro e escuro** nas duas páginas, com o botão de sol/lua no cabeçalho
+- **Recado de abertura**, que aparece na primeira visita e depois fica no botão do coração
 
 O progresso e o tema escolhido ficam salvos no navegador (`localStorage`), então dá para fechar e voltar depois. Sem escolha salva, o site acompanha o tema do sistema. A cola **sempre imprime em claro**, mesmo que você esteja lendo no escuro.
 
@@ -52,6 +53,7 @@ Em um ou dois minutos o site fica no ar em `https://SEU-USUARIO.github.io/SEU-RE
 | `estilo.css` | Estilo do guia (tema claro e escuro) |
 | `cola.css` | Estilo da cola impressa |
 | `tema.js` | Alternância entre tema claro e escuro (usado pelas duas páginas) |
+| `recado.js` | Diálogo de abertura |
 | `util.js` | Funções auxiliares e armazenamento local |
 | `db.js` | Banco de exemplo (escola) usado em Modelagem e SQL |
 | `sqlmini.js` | Interpretador de SQL que roda no navegador |

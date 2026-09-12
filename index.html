@@ -31,6 +31,7 @@
 
     <div class="lateral-rodape">
       <a class="link-lateral" href="cola.html">Cola para imprimir →</a>
+      <button class="link-lateral" id="abrir-recado" type="button">♥ Ler o recadinho</button>
     </div>
   </aside>
 
@@ -50,6 +51,17 @@
 
 </div>
 
+<dialog id="recado" class="recado" aria-labelledby="recado-titulo">
+  <div class="recado-cartao">
+    <span class="recado-selo">Para você</span>
+    <h2 id="recado-titulo">Antes de começar</h2>
+    <p>Esta página foi construída para o meu amor.</p>
+    <p>Ela existe para te ajudar a entender e fixar o conteúdo na cachola, e para você enxergar o quão inteligente e dedicada você consegue ser.</p>
+    <p class="recado-assinatura">Amo muito você. Bons estudos. <span class="recado-coracao" aria-hidden="true">♥</span></p>
+    <button class="btn-primario" id="fechar-recado" type="button">Começar a estudar</button>
+  </div>
+</dialog>
+
 <script src="util.js"></script>
 <script src="db.js"></script>
 <script src="sqlmini.js"></script>
@@ -58,6 +70,7 @@
 <script src="sim-bd.js"></script>
 <script src="sim-so-seg.js"></script>
 <script src="app.js"></script>
+<script src="recado.js"></script>
 
 </body>
 </html>
