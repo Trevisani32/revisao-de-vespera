@@ -298,7 +298,7 @@ SIMULADORES.exercicioEscalonamento = function (caixa) {
   campo.addEventListener('keydown', ev => { if (ev.key === 'Enter') conferir(); });
 
   caixa.appendChild(el('div', { class: 'sim' }, [
-    el('div', { class: 'sim-topo' }, [el('h4', { texto: 'Exercício de cálculo — infinito' }), contador]),
+    el('div', { class: 'sim-topo' }, [el('h4', { texto: 'Exercício de cálculo, infinito' }), contador]),
     el('p', { class: 'sim-instrucao', html: 'Questão nova a cada rodada, no formato que cai na prova. Faça a conta no papel e confira.' }),
     enunciado, tabela,
     el('div', { class: 'linha-botoes' }, [
@@ -317,7 +317,7 @@ SIMULADORES.exercicioEscalonamento = function (caixa) {
 SIMULADORES.deadlock = function (caixa) {
   const condicoes = [
     { id: 'em', nome: 'Exclusão mútua', desc: 'O recurso só aceita um processo por vez.',
-      quebra: 'Tornar o recurso compartilhável. Funciona para um arquivo só de leitura — mas uma impressora não tem como ser dividida, então nem sempre dá.' },
+      quebra: 'Tornar o recurso compartilhável. Funciona para um arquivo só de leitura, mas uma impressora não tem como ser dividida, então nem sempre dá.' },
     { id: 'pe', nome: 'Posse e espera', desc: 'O processo segura o que já tem enquanto pede mais.',
       quebra: 'Exigir que o processo peça <b>todos</b> os recursos de uma vez, no início. Custo: recurso fica reservado parado, e pode gerar starvation.' },
     { id: 'np', nome: 'Não preempção', desc: 'Não dá para tomar à força um recurso já concedido.',
@@ -387,7 +387,7 @@ SIMULADORES.deadlock = function (caixa) {
       estado.innerHTML = '<div class="nok"><b>Deadlock.</b> As quatro condições estão presentes ao mesmo tempo e o ciclo se fechou: ninguém sai daqui sozinho.</div>';
       detalhe.innerHTML = 'Clique em uma condição acima para quebrá-la e ver o bloqueio se desfazer.';
     } else {
-      estado.innerHTML = '<div class="ok"><b>Sem deadlock.</b> ' + quebradas.length + ' condição' + (quebradas.length > 1 ? 'ões quebradas' : ' quebrada') + ' — e basta uma para impedir o bloqueio.</div>';
+      estado.innerHTML = '<div class="ok"><b>Sem deadlock.</b> ' + quebradas.length + ' condição' + (quebradas.length > 1 ? 'ões quebradas' : ' quebrada') + '. Basta uma para impedir o bloqueio.</div>';
       detalhe.innerHTML = '<b>' + quebradas[0].nome + ':</b> ' + quebradas[0].quebra;
     }
   }
@@ -417,7 +417,7 @@ SIMULADORES.deadlock = function (caixa) {
 /* ---------- Classificador CID ---------- */
 
 const CENARIOS_CID = [
-  { t: 'Um ataque DDoS derruba o site da faculdade no dia da matrícula.', r: 'D', p: 'Ninguém roubou nem alterou dado — o serviço ficou inacessível.' },
+  { t: 'Um ataque DDoS derruba o site da faculdade no dia da matrícula.', r: 'D', p: 'Ninguém roubou nem alterou dado, o serviço ficou inacessível.' },
   { t: 'Um funcionário altera o valor de uma nota fiscal no sistema sem autorização.', r: 'I', p: 'O dado foi modificado indevidamente.' },
   { t: 'Um banco de dados com senhas de clientes vaza na internet.', r: 'C', p: 'Informação exposta a quem não deveria ver.' },
   { t: 'O servidor de arquivos queima e não havia backup.', r: 'D', p: 'Os dados existiam e estavam corretos, mas ficaram inacessíveis.' },
@@ -428,7 +428,7 @@ const CENARIOS_CID = [
   { t: 'Um notebook sem criptografia de disco é roubado com dados de pacientes.', r: 'C', p: 'Dados sensíveis expostos a terceiros.' },
   { t: 'O sistema de emissão de notas fica fora do ar por falta de energia.', r: 'D', p: 'Indisponibilidade, ainda que sem ataque nenhum.' },
   { t: 'Um vírus corrompe arquivos de planilha, trocando valores aleatoriamente.', r: 'I', p: 'Os dados perderam a exatidão.' },
-  { t: 'Um e-mail confidencial é enviado por engano para a lista de toda a empresa.', r: 'C', p: 'Exposição indevida — e nem sempre o vilão é um ataque.' }
+  { t: 'Um e-mail confidencial é enviado por engano para a lista de toda a empresa.', r: 'C', p: 'Exposição indevida, e nem sempre o vilão é um ataque.' }
 ];
 
 SIMULADORES.cid = function (caixa) {
@@ -545,7 +545,7 @@ function sha256(texto) {
 /* ---------- Criptografia ---------- */
 
 const CENARIOS_CHAVE = [
-  { t: 'Ana quer enviar um contrato que <b>só Bruno</b> possa ler.', r: 'pubB', p: 'Para sigilo, cifra-se com a chave pública do destinatário — só a privada dele abre.' },
+  { t: 'Ana quer enviar um contrato que <b>só Bruno</b> possa ler.', r: 'pubB', p: 'Para sigilo, cifra-se com a chave pública do destinatário, só a privada dele abre.' },
   { t: 'Ana quer <b>assinar</b> um documento para provar que foi ela quem escreveu.', r: 'privA', p: 'Para assinar, usa-se a chave privada do autor. Qualquer um confere com a pública dela.' },
   { t: 'Bruno recebeu um documento assinado por Ana e quer <b>verificar</b> a assinatura.', r: 'pubA', p: 'A verificação usa a chave pública do autor. Se abriu, foi mesmo Ana.' },
   { t: 'Bruno recebeu um arquivo cifrado para ele e quer <b>abrir</b>.', r: 'privB', p: 'Para abrir o que foi cifrado com a pública dele, usa-se a privada dele.' },
@@ -578,7 +578,7 @@ SIMULADORES.cripto = function (caixa) {
     for (let i = 0; i < 64; i++) if (h1[i] === h2[i]) iguais++;
     comparativo.innerHTML = entradaHash.value === entradaHash2.value
       ? 'Textos idênticos geram <b>exatamente o mesmo hash</b>, sempre. É isso que permite verificar integridade.'
-      : 'Os dois textos diferem por pouquíssimo, mas os hashes coincidem em apenas <b>' + iguais + ' de 64</b> caracteres. Esse é o <b>efeito avalanche</b>: mudou um bit, muda tudo — e é por isso que dá para detectar qualquer adulteração.';
+      : 'Os dois textos diferem por pouquíssimo, mas os hashes coincidem em apenas <b>' + iguais + ' de 64</b> caracteres. Esse é o <b>efeito avalanche</b>: mudou um bit, muda tudo, e é por isso que dá para detectar qualquer adulteração.';
   }
 
   entradaHash.addEventListener('input', recalcular);

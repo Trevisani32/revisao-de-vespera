@@ -7,7 +7,7 @@ const SIMULADORES = {};
 const CENARIOS_CARD = [
   { a: 'CURSO', b: 'ALUNO', texto: 'Um curso tem vários alunos. Um aluno pertence a um único curso.', r: '1:N', fk: 'FK curso_id na tabela ALUNO (lado N)' },
   { a: 'ALUNO', b: 'DISCIPLINA', texto: 'Um aluno cursa várias disciplinas. Uma disciplina tem vários alunos.', r: 'N:N', fk: 'Tabela associativa MATRICULA com aluno_id + disciplina_id' },
-  { a: 'PESSOA', b: 'PASSAPORTE', texto: 'Uma pessoa tem no máximo um passaporte. Um passaporte pertence a uma pessoa.', r: '1:1', fk: 'FK em qualquer um dos lados, com UNIQUE — prefira o lado obrigatório' },
+  { a: 'PESSOA', b: 'PASSAPORTE', texto: 'Uma pessoa tem no máximo um passaporte. Um passaporte pertence a uma pessoa.', r: '1:1', fk: 'FK em qualquer um dos lados, com UNIQUE, prefira o lado obrigatório' },
   { a: 'PROFESSOR', b: 'DISCIPLINA', texto: 'Um professor leciona várias disciplinas. Cada disciplina tem um professor responsável.', r: '1:N', fk: 'FK professor_id na tabela DISCIPLINA (lado N)' },
   { a: 'PEDIDO', b: 'PRODUTO', texto: 'Um pedido contém vários produtos. Um produto aparece em vários pedidos.', r: 'N:N', fk: 'Tabela associativa ITEM_PEDIDO, que ainda ganha quantidade e preço' },
   { a: 'CLIENTE', b: 'PEDIDO', texto: 'Um cliente faz vários pedidos. Cada pedido é de um único cliente.', r: '1:N', fk: 'FK cliente_id na tabela PEDIDO (lado N)' },
@@ -75,10 +75,10 @@ SIMULADORES.cardinalidade = function (caixa) {
 SIMULADORES.normalizacao = function (caixa) {
   const etapas = [
     {
-      titulo: 'Tabela original — bagunçada',
+      titulo: 'Tabela original, bagunçada',
       forma: 'Nenhuma forma normal',
       explica: 'Uma tabela só, com tudo dentro. Repare no campo <b>disciplinas</b>: tem duas coisas na mesma célula. E o nome do curso se repete em toda linha do mesmo curso.',
-      problema: 'Se o curso "Sistemas de Informação" mudar de nome, é preciso alterar várias linhas — e basta esquecer uma para o banco ficar inconsistente.',
+      problema: 'Se o curso "Sistemas de Informação" mudar de nome, é preciso alterar várias linhas, e basta esquecer uma para o banco ficar inconsistente.',
       tabelas: [{
         nome: 'MATRICULA',
         cab: ['aluno_id', 'aluno_nome', 'curso_id', 'curso_nome', 'disciplinas'],
@@ -92,9 +92,9 @@ SIMULADORES.normalizacao = function (caixa) {
     },
     {
       titulo: '1ª Forma Normal',
-      forma: '1FN — valores atômicos',
+      forma: '1FN, valores atômicos',
       explica: 'Quebramos a célula que tinha lista. Agora <b>cada campo guarda um valor só</b> e cada disciplina ganha sua própria linha.',
-      problema: 'Resolvido o campo múltiplo — mas agora curso_nome e aluno_nome se repetem ainda mais. É o próximo problema a atacar.',
+      problema: 'Resolvido o campo múltiplo, mas agora curso_nome e aluno_nome se repetem ainda mais. É o próximo problema a atacar.',
       tabelas: [{
         nome: 'MATRICULA',
         cab: ['aluno_id', 'aluno_nome', 'curso_id', 'curso_nome', 'disciplina_id', 'disciplina_nome'],
@@ -110,8 +110,8 @@ SIMULADORES.normalizacao = function (caixa) {
     },
     {
       titulo: '2ª Forma Normal',
-      forma: '2FN — sem dependência parcial',
-      explica: 'A chave desta tabela é <b>composta</b>: (aluno_id + disciplina_id). Mas <b>aluno_nome depende só de aluno_id</b> e <b>disciplina_nome depende só de disciplina_id</b> — cada um depende de <i>metade</i> da chave. Isso é dependência parcial, e a saída é separar em tabelas próprias.',
+      forma: '2FN, sem dependência parcial',
+      explica: 'A chave desta tabela é <b>composta</b>: (aluno_id + disciplina_id). Mas <b>aluno_nome depende só de aluno_id</b> e <b>disciplina_nome depende só de disciplina_id</b>: cada um depende de <i>metade</i> da chave. Isso é dependência parcial, e a saída é separar em tabelas próprias.',
       problema: 'Sobrou um problema sutil na tabela ALUNO: curso_nome não depende do aluno, depende de curso_id. Essa é a próxima etapa.',
       tabelas: [
         { nome: 'ALUNO', cab: ['aluno_id (PK)', 'aluno_nome', 'curso_id', 'curso_nome'],
@@ -125,7 +125,7 @@ SIMULADORES.normalizacao = function (caixa) {
     },
     {
       titulo: '3ª Forma Normal',
-      forma: '3FN — sem dependência transitiva',
+      forma: '3FN, sem dependência transitiva',
       explica: 'Em ALUNO, <b>curso_nome dependia de curso_id</b>, que não é chave. Campo não-chave dependendo de outro campo não-chave é <b>dependência transitiva</b>. Tiramos o curso para a tabela dele e deixamos só a FK.',
       problema: 'Pronto. Agora cada informação mora em um lugar só: mudar o nome do curso é alterar <b>uma linha</b>, e as três anomalias desapareceram.',
       tabelas: [
@@ -206,7 +206,7 @@ SIMULADORES.join = function (caixa) {
     INNER: 'Só aparece quem tem par nos <b>dois</b> lados. Lucas Ferraz (sem curso) some, e o curso Redes (sem aluno nesta amostra) também.',
     LEFT: '<b>Todos os alunos</b> aparecem, tendo curso ou não. Lucas Ferraz volta, com as colunas do curso em <b>NULL</b>.',
     RIGHT: '<b>Todos os cursos</b> aparecem, tendo aluno ou não. Quem some é o aluno sem curso.',
-    CROSS: 'Cada aluno combinado com <b>cada</b> curso. ' + (esquerda.length * direita.length) + ' linhas de puro lixo — é o que acontece quando você esquece o ON.'
+    CROSS: 'Cada aluno combinado com <b>cada</b> curso. ' + (esquerda.length * direita.length) + ' linhas de puro lixo, é o que acontece quando você esquece o ON.'
   };
 
   function calcular() {
@@ -337,7 +337,7 @@ SIMULADORES.sql = function (caixa) {
 
     saida.appendChild(el('div', { class: 'contagem', html: '<b>' + r.linhas.length + '</b> linha' + (r.linhas.length === 1 ? '' : 's') + ' retornada' + (r.linhas.length === 1 ? '' : 's') }));
     if (r.linhas.length === 0) {
-      saida.appendChild(el('div', { class: 'aviso', html: 'A consulta rodou sem erro, mas <b>não trouxe nenhuma linha</b>. Confira o WHERE — e lembre que comparar com NULL usando <code>=</code> nunca dá certo.' }));
+      saida.appendChild(el('div', { class: 'aviso', html: 'A consulta rodou sem erro, mas <b>não trouxe nenhuma linha</b>. Confira o WHERE, e lembre que comparar com NULL usando <code>=</code> nunca dá certo.' }));
     } else {
       saida.appendChild(tabelaResultado(r.colunas, r.linhas));
     }
@@ -368,7 +368,7 @@ SIMULADORES.sql = function (caixa) {
 
   caixa.appendChild(el('div', { class: 'sim' }, [
     el('div', { class: 'sim-topo' }, [el('h4', { texto: 'Laboratório de SQL' }), progresso]),
-    el('p', { class: 'sim-instrucao', html: 'Banco de verdade rodando aqui dentro. Escreva a consulta e execute — o resultado é calculado na hora, e os erros vêm explicados.' }),
+    el('p', { class: 'sim-instrucao', html: 'Banco de verdade rodando aqui dentro. Escreva a consulta e execute, o resultado é calculado na hora, e os erros vêm explicados.' }),
     esquema, enunciado, editor,
     el('div', { class: 'linha-botoes' }, [
       el('button', { class: 'btn-primario', type: 'button', texto: 'Executar', onclick: executar }),

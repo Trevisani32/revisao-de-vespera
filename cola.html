@@ -46,18 +46,18 @@
     <div class="caixa">
       <h3>Tipos de atributo</h3>
       <ul>
-        <li><b>Simples</b> — indivisível (CPF)</li>
-        <li><b>Composto</b> — endereço → rua, nº, CEP</li>
-        <li><b>Multivalorado</b> — vários telefones (<b>proibido</b> no relacional: vira tabela)</li>
-        <li><b>Derivado</b> — idade (não se armazena)</li>
+        <li><b>Simples</b>: indivisível (CPF)</li>
+        <li><b>Composto</b>: endereço → rua, nº, CEP</li>
+        <li><b>Multivalorado</b>: vários telefones (<b>proibido</b> no relacional: vira tabela)</li>
+        <li><b>Derivado</b>: idade (não se armazena)</li>
       </ul>
     </div>
 
     <div class="caixa chave">
       <h3>Chaves</h3>
-      <p><b>PK</b> — única, <b>nunca NULL</b><br>
-      <b>FK</b> — aponta para PK de outra tabela, <b>aceita NULL</b><br>
-      <b>Candidata</b> — poderia ser PK · <b>Alternativa</b> — candidata não escolhida</p>
+      <p><b>PK</b>: única, <b>nunca NULL</b><br>
+      <b>FK</b>: aponta para PK de outra tabela, <b>aceita NULL</b><br>
+      <b>Candidata</b>: poderia ser PK · <b>Alternativa</b>: candidata não escolhida</p>
     </div>
 
     <div class="caixa chave">
@@ -72,12 +72,12 @@
     </div>
 
     <div class="caixa chave">
-      <h3>Normalização — o mantra</h3>
+      <h3>Normalização: o mantra</h3>
       <p>Cada campo depende <b>da chave</b> (1FN), <b>da chave inteira</b> (2FN) e <b>de nada além da chave</b> (3FN).</p>
       <ul>
-        <li><b>1FN</b> — valor atômico, sem grupo repetido</li>
-        <li><b>2FN</b> — sem dependência <b>parcial</b></li>
-        <li><b>3FN</b> — sem dependência <b>transitiva</b></li>
+        <li><b>1FN</b>: valor atômico, sem grupo repetido</li>
+        <li><b>2FN</b>: sem dependência <b>parcial</b></li>
+        <li><b>3FN</b>: sem dependência <b>transitiva</b></li>
       </ul>
     </div>
 
@@ -86,7 +86,7 @@
       <ul>
         <li><b>2FN só é violada com chave composta.</b> PK de uma coluna + 1FN = já está em 2FN</li>
         <li>PK não aceita NULL; <b>FK aceita</b></li>
-        <li>Tabela associativa costuma ter <b>atributos próprios</b> (nota, quantidade) — são do relacionamento</li>
+        <li>Tabela associativa costuma ter <b>atributos próprios</b> (nota, quantidade), que são do relacionamento</li>
         <li>Anomalias: <b>inserção, atualização, exclusão</b></li>
       </ul>
     </div>
@@ -114,9 +114,9 @@
     <div class="caixa pega">
       <h3>DELETE × TRUNCATE × DROP</h3>
       <ul>
-        <li><b>DELETE</b> — DML, linha a linha, aceita WHERE, dá ROLLBACK</li>
-        <li><b>TRUNCATE</b> — <b>DDL</b>, esvazia tudo, <b>sem WHERE</b>, sem volta</li>
-        <li><b>DROP</b> — apaga a tabela <b>e a estrutura</b></li>
+        <li><b>DELETE</b>: DML, linha a linha, aceita WHERE, dá ROLLBACK</li>
+        <li><b>TRUNCATE</b>: <b>DDL</b>, esvazia tudo, <b>sem WHERE</b>, sem volta</li>
+        <li><b>DROP</b>: apaga a tabela <b>e a estrutura</b></li>
       </ul>
     </div>
 
@@ -136,7 +136,7 @@
 
     <div class="caixa pega">
       <h3>NULL</h3>
-      <p><code>WHERE col = NULL</code> <b>nunca funciona</b> e não dá erro — simplesmente não retorna nada.</p>
+      <p><code>WHERE col = NULL</code> <b>nunca funciona</b> e não dá erro, simplesmente não retorna nada.</p>
       <p>Certo: <code>IS NULL</code> / <code>IS NOT NULL</code></p>
       <p><code>COUNT(*)</code> conta tudo · <code>COUNT(col)</code> <b>ignora NULL</b></p>
     </div>
@@ -151,9 +151,9 @@
 
     <div class="caixa chave">
       <h3>JOIN</h3>
-      <p><b>INNER</b> — só quem tem par nos dois lados<br>
-      <b>LEFT</b> — <b>todos da esquerda</b>, com par ou não<br>
-      <b>CROSS</b> — todas as combinações (JOIN sem ON)</p>
+      <p><b>INNER</b>: só quem tem par nos dois lados<br>
+      <b>LEFT</b>: <b>todos da esquerda</b>, com par ou não<br>
+      <b>CROSS</b>: todas as combinações (JOIN sem ON)</p>
       <p>Pergunta com <b>"inclusive os que não têm"</b> → <b>LEFT JOIN</b>.</p>
       <p>Quem <b>não</b> tem par: <code>LEFT JOIN … WHERE b.id IS NULL</code></p>
       <p>Atravessar N:N = <b>2 JOINs</b>.</p>
@@ -167,7 +167,7 @@
 
     <div class="caixa pega">
       <h3>Sintaxe que a prova inverte</h3>
-      <p><code>UPDATE tabela SET col = valor WHERE cond</code> — SET <b>sempre antes</b> do WHERE.</p>
+      <p><code>UPDATE tabela SET col = valor WHERE cond</code>: SET <b>sempre antes</b> do WHERE.</p>
       <p>Sem WHERE, UPDATE e DELETE valem para <b>todas as linhas</b>.</p>
       <p>Subconsulta com vários valores → <b>IN</b>, não <code>=</code>.</p>
     </div>
@@ -197,9 +197,9 @@
     <div class="caixa">
       <h3>Tipos de thread</h3>
       <ul>
-        <li><b>Usuário</b> — rápida; se uma bloqueia, <b>todas bloqueiam</b></li>
-        <li><b>Kernel</b> — paralelismo real, porém mais lenta (chamada de sistema)</li>
-        <li><b>Híbrida</b> — combina as duas</li>
+        <li><b>Usuário</b>: rápida; se uma bloqueia, <b>todas bloqueiam</b></li>
+        <li><b>Kernel</b>: paralelismo real, porém mais lenta (chamada de sistema)</li>
+        <li><b>Híbrida</b>: combina as duas</li>
       </ul>
     </div>
 
@@ -231,7 +231,7 @@
     </div>
 
     <div class="caixa chave">
-      <h3>Deadlock — Coffman</h3>
+      <h3>Deadlock: Coffman</h3>
       <p>Precisam das <b>4 ao mesmo tempo</b>:</p>
       <p>1. Exclusão mútua · 2. Posse e espera · 3. Não preempção · 4. <b>Espera circular</b></p>
       <p>Estratégias: <b>prevenção</b> (impede uma condição) · <b>evitação</b> = algoritmo do <b>banqueiro</b> · detecção · ignorar = <b>avestruz</b></p>
@@ -246,8 +246,8 @@
 
     <div class="caixa chave">
       <h3>Mutex × Semáforo</h3>
-      <p><b>Mutex</b> — binário, <b>tem dono</b> (só quem travou destrava), lock/unlock</p>
-      <p><b>Semáforo</b> — contador, sem dono, deixa passar N, <b>wait (P) / signal (V)</b></p>
+      <p><b>Mutex</b>: binário, <b>tem dono</b> (só quem travou destrava), lock/unlock</p>
+      <p><b>Semáforo</b>: contador, sem dono, deixa passar N, <b>wait (P) / signal (V)</b></p>
       <p>Semáforo iniciado em 1 = semáforo binário ≈ mutex.</p>
     </div>
 
@@ -276,9 +276,9 @@
 
     <div class="caixa chave">
       <h3>Tripé CID</h3>
-      <p><b>Confidencialidade</b> — só quem pode, vê (vazamento)<br>
-      <b>Integridade</b> — não foi alterado (boleto adulterado)<br>
-      <b>Disponibilidade</b> — acessível quando preciso (DDoS, ransomware)</p>
+      <p><b>Confidencialidade</b>: só quem pode, vê (vazamento)<br>
+      <b>Integridade</b>: não foi alterado (boleto adulterado)<br>
+      <b>Disponibilidade</b>: acessível quando preciso (DDoS, ransomware)</p>
       <p>Extras: <b>autenticidade</b> (quem é) · <b>não repúdio</b> (não pode negar) · legalidade · privacidade</p>
     </div>
 
@@ -310,7 +310,7 @@
     <div class="caixa pega">
       <h3>Assinatura digital</h3>
       <p>Garante <b>autenticidade + integridade + não repúdio</b>.</p>
-      <p><b>NÃO garante confidencialidade</b> — o documento continua legível. Pegadinha nº 1.</p>
+      <p><b>NÃO garante confidencialidade</b>: o documento continua legível. Pegadinha nº 1.</p>
       <p><b>Certificado digital</b> = a AC atestando de quem é a chave pública.</p>
     </div>
 
@@ -353,7 +353,7 @@
       <h3>Hacker × Cracker e LGPD</h3>
       <p>A palavra que separa é <b>autorização</b>. Hacker = white hat; cracker = black hat.</p>
       <p><b>Nenhum SO é imune.</b> Alternativa com "imune" ou "sem vulnerabilidade" está errada.</p>
-      <p>LGPD — <b>dado sensível</b>: raça, religião, opinião política, saúde, biometria, vida sexual.</p>
+      <p>LGPD, <b>dado sensível</b>: raça, religião, opinião política, saúde, biometria, vida sexual.</p>
     </div>
 
   </div>

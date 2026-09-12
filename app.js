@@ -229,7 +229,7 @@ function montarFlashcards(materiaId) {
             el('b', { texto: 'Termos-chave: ' + achados.length + ' de ' + termos.length }),
             el('span', { texto: faltaram.length === 0
               ? 'Você escreveu todos. A conferência final é sua.'
-              : 'Isto é uma conferência, não uma correção — releia a resposta e decida você.' })
+              : 'Isto é uma conferência, não uma correção, releia a resposta e decida você.' })
           ]),
           marcas
         ]));
@@ -271,7 +271,7 @@ function montarFlashcards(materiaId) {
   });
 
   raiz.appendChild(el('div', { class: 'sim-topo' }, [el('h3', { texto: 'Flashcards' }), contador]));
-  raiz.appendChild(el('p', { class: 'sim-instrucao', html: 'Escreva a resposta <b>antes</b> de revelar — é o esforço de lembrar que fixa. Ctrl+Enter revela.' }));
+  raiz.appendChild(el('p', { class: 'sim-instrucao', html: 'Escreva a resposta <b>antes</b> de revelar, é o esforço de lembrar que fixa. Ctrl+Enter revela.' }));
   raiz.appendChild(barra);
   raiz.appendChild(el('div', { class: 'linha-botoes' }, [
     filtro,
@@ -313,7 +313,7 @@ function montarQuestoes(materiaId) {
       el('b', { texto: acertos + ' de ' + ordem.length + ' corretas' }),
       el('p', { texto: pct >= 80 ? 'Essa matéria está no ponto. Passe para a próxima.'
         : pct >= 60 ? 'Quase lá. Refaça só as que você errou.'
-        : 'Volte ao Aprender desta matéria antes de tentar de novo — vale mais que insistir na questão.' })
+        : 'Volte ao Aprender desta matéria antes de tentar de novo, vale mais que insistir na questão.' })
     ]));
     const acoes = el('div', { class: 'linha-botoes' }, [
       el('button', { class: 'btn-primario', type: 'button', texto: 'Refazer tudo', onclick: () => {
@@ -369,7 +369,7 @@ function montarQuestoes(materiaId) {
   }
 
   raiz.appendChild(el('div', { class: 'sim-topo' }, [el('h3', { texto: 'Questões' }), contador]));
-  raiz.appendChild(el('p', { class: 'sim-instrucao', html: 'Responda e leia a explicação <b>mesmo quando acertar</b> — é ali que mora a pegadinha da próxima.' }));
+  raiz.appendChild(el('p', { class: 'sim-instrucao', html: 'Responda e leia a explicação <b>mesmo quando acertar</b>: é ali que mora a pegadinha da próxima.' }));
   raiz.appendChild(barra);
   raiz.appendChild(corpo);
 
@@ -391,7 +391,7 @@ function montarInicio() {
   raiz.appendChild(el('h3', { class: 'sub', texto: 'Roteiro sugerido' }));
   raiz.appendChild(el('ol', { class: 'passos' }, [
     el('li', null, [el('b', { texto: 'Modelagem e SQL primeiro' }), el('span', { html: 'São irmãs: você modela o banco da escola e depois consulta <b>esse mesmo banco</b>. Estudar juntas economiza metade do esforço.' })]),
-    el('li', null, [el('b', { texto: 'Sistemas Operacionais depois' }), el('span', { html: 'Reserve tempo para o <b>simulador de escalonamento</b> — é a única parte que cai como conta.' })]),
+    el('li', null, [el('b', { texto: 'Sistemas Operacionais depois' }), el('span', { html: 'Reserve tempo para o <b>simulador de escalonamento</b>: é a única parte que cai como conta.' })]),
     el('li', null, [el('b', { texto: 'Segurança por último' }), el('span', { html: 'É a mais decorativa das quatro, então é a que mais se beneficia dos flashcards perto da hora.' })]),
     el('li', null, [el('b', { texto: 'Na última hora, só flashcards' }), el('span', { html: 'Ative o filtro <i>"só os que ainda não sei"</i> e passe os quatro baralhos.' })])
   ]));
@@ -414,7 +414,7 @@ function montarInicio() {
 
   raiz.appendChild(el('div', { class: 'cai-na-prova' }, [
     el('span', { class: 'etiqueta', texto: 'Como usar' }),
-    el('div', { html: 'Seu progresso fica salvo <b>neste navegador</b>, então dá para fechar e voltar. Os blocos marcados como <b>Cai na prova</b> são as pegadinhas clássicas — se o tempo apertar, leia só eles e vá direto para as questões.' })
+    el('div', { html: 'Seu progresso fica salvo <b>neste navegador</b>, então dá para fechar e voltar. Os blocos marcados como <b>Cai na prova</b> são as pegadinhas clássicas, se o tempo apertar, leia só eles e vá direto para as questões.' })
   ]));
 
   return raiz;

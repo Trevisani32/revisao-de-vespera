@@ -6,7 +6,7 @@ Cada conceito começa por uma analogia do dia a dia, passa por um simulador e te
 
 ## Como abrir
 
-Dê duplo clique em `index.html`. Não precisa instalar nada, não precisa de servidor — é HTML, CSS e JavaScript puros, sem dependências.
+Dê duplo clique em `index.html`. Não precisa instalar nada, não precisa de servidor, é HTML, CSS e JavaScript puros, sem dependências.
 
 ## O que tem dentro
 
@@ -21,7 +21,7 @@ Dê duplo clique em `index.html`. Não precisa instalar nada, não precisa de se
   - SHA-256 real demonstrando o efeito avalanche
 - **109 flashcards** com campo para escrever a resposta antes de revelar, conferência dos termos-chave, marcação de "já sei" e filtro de revisão
 - **75 questões** de múltipla escolha com explicação do porquê da resposta
-- **Cola para imprimir** (`cola.html`) — abra e aperte Ctrl+P
+- **Cola para imprimir** (`cola.html`), abra e aperte Ctrl+P
 - **Tema claro e escuro** nas duas páginas, com o botão de sol/lua no cabeçalho
 
 O progresso e o tema escolhido ficam salvos no navegador (`localStorage`), então dá para fechar e voltar depois. Sem escolha salva, o site acompanha o tema do sistema. A cola **sempre imprime em claro**, mesmo que você esteja lendo no escuro.
@@ -61,4 +61,4 @@ Em um ou dois minutos o site fica no ar em `https://SEU-USUARIO.github.io/SEU-RE
 | `sim-so-seg.js` | Simuladores de SO e Segurança |
 | `app.js` | Navegação, flashcards e simulado |
 
-Para mudar ou acrescentar conteúdo, mexa em `conteudo.js` (explicações) e `pratica.js` (flashcards e questões) — são listas simples, não exigem tocar no resto.
+Para mudar ou acrescentar conteúdo, mexa em `conteudo.js` (explicações) e `pratica.js` (flashcards e questões), são listas simples, não exigem tocar no resto.
